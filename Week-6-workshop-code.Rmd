@@ -1,0 +1,53 @@
+---
+title: "Week 6 In Class Code"
+author: "Graycen Mahon"
+date: "2023-05-10"
+output: html_document
+---
+
+# Load in the packages
+
+```{r package-set-up}
+library(here)
+library(tidyverse)
+library(naniar)
+library(skimr)
+library(plotly)
+library(magick)
+library(NatParksPalettes)
+library(wesanderson)
+library(patchwork)
+```
+
+
+# Load in data
+
+```{r loading-data}
+# create a new object called whales
+# read in the whales data
+whales <- read_csv(
+  here("data", "Graywhale_watching_2007_2019.csv")
+)
+```
+
+# Look at missing data
+
+```{r missing-data-vis}
+gg_miss_var(whales)
+```
+
+# Use Skimr package to quickly glimpse the data:
+
+```{r glimpse-of-data-using-skimr}
+skim(whales)
+```
+
+# wrangling
+
+```{r whales-wrangling}
+whales_clean <- whales %>% 
+# use mutate to create a new column
+  mutate(year_new = lubridate::year(date)) %>% 
+mutate(month_new = lubridate::month(date))
+```
+
